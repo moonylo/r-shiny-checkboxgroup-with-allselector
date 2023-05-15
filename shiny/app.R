@@ -5,8 +5,14 @@ checkboxGroupInputWithAllSelector <- function(inputId, label, choices = NULL, se
                                   width = NULL, choiceNames = NULL, choiceValues = NULL, allSelectorLabel = "All/None"){
   
   choicesWithAllSelector <- c(allSelectorLabel, choices)
+  if (all(selected %>% sort() == choices %>% sort)) {
+    selectedWithAllSelector <- c(selected, allSelectorLabel)
+  } else {
+    selectedWithAllSelector <- selected
+  }
+
   checkboxGroupInputNew <- checkboxGroupInput(
-    inputId = inputId, label = label, choices = choicesWithAllSelector, selected = selected, inline = inline, 
+    inputId = inputId, label = label, choices = choicesWithAllSelector, selected = selectedWithAllSelector, inline = inline,
     width = width, choiceNames = choiceNames, choiceValues = choiceValues
   )
   
